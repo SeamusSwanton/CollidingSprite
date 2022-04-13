@@ -10,7 +10,7 @@ public class CollidingSpriteUniverse implements Universe {
 	private ArrayList<DisplayableSprite> sprites = new ArrayList<DisplayableSprite>();	
 	private String status = "";
 
-	private final double VELOCITY = 200;	
+	private final double VELOCITY = 300;	
 	
 	//	//require a separate list for sprites to be removed to avoid a concurence exception
 	private ArrayList<DisplayableSprite> disposalList = new ArrayList<DisplayableSprite>();
@@ -37,7 +37,7 @@ public class CollidingSpriteUniverse implements Universe {
 				double minX = screenMinX + (col * COL_WIDTH);
 				double minY = screenMinY + (row * ROW_HEIGHT);
 				if (row == 0 && col == 0) {
-					player1 = new ABCSprite(minX + COL_WIDTH / 2 + 8, minY + ROW_HEIGHT / 2 + 8);
+					player1 = new SMSRSprite(minX + COL_WIDTH / 2 + 8, minY + ROW_HEIGHT / 2 + 8);
 					sprites.add(player1);					
 				}
 				else if (row == ROWS - 1 && col == COLS -1) {
