@@ -185,7 +185,7 @@ public class SMSRSprite implements DisplayableSprite, MovableSprite, CollidingSp
 		//move only if no collision results		
 		checkProximityMessage(universe);
 		
-		checkIsAtExit( universe);
+		checkIsAtExit(universe);
 		
 		
 		if ( getAcquiredCoin( universe) == false) {
