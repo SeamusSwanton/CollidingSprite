@@ -183,9 +183,10 @@ public class SMSRSprite implements DisplayableSprite, MovableSprite, CollidingSp
 		
 		//before changing position, check if the new position would result in a collision with another sprite
 		//move only if no collision results		
+		checkProximityMessage(universe);
 		
-		if ( checkIsAtExit( universe) == false) {
-		}
+		checkIsAtExit( universe);
+		
 		
 		if ( getAcquiredCoin( universe) == false) {
 		}
@@ -199,7 +200,7 @@ public class SMSRSprite implements DisplayableSprite, MovableSprite, CollidingSp
 
 		}
 		
-		checkProximityMessage(universe);
+		
 	}
 
 	private boolean checkCollisionWithBarrier(Universe sprites, double deltaX, double deltaY) {
