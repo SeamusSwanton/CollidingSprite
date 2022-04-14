@@ -24,9 +24,11 @@ public class SMSRSprite implements DisplayableSprite, MovableSprite, CollidingSp
 	private double velocityY = 0;
 	private int elapsedTime = 0;
 	private boolean isAtExit = false;
+
 	
 	public int score = 0;
-	double isCloseToSprite = 0;
+	boolean isCloseToSprite = false;
+	private String proximityMessage = "not close";
 	
 	private Direction direction = Direction.NEUTRAL;
 	
@@ -253,17 +255,38 @@ public class SMSRSprite implements DisplayableSprite, MovableSprite, CollidingSp
 	}
 
 
-	public void checkProximityMessage(Universe sprites) {
+	public boolean checkProximityMessage(Universe sprites) {
 
 		
 		for (DisplayableSprite sprite : sprites.getSprites()) {
-			if (sprite instanceof CoinSprite == false && sprite instanceof BarrierSprite == false && sprite instanceof SMSRSprite == false && sprite instanceof ExitSprite == false) {
-				isCloseToSprite = Math.sqrt(Math.pow((this.getCenterX() - sprite.getCenterX()), 2) + Math.pow(this.getCenterX() - sprite.getCenterX(), 2));
-				if (isCloseToSprite <= 100){
-					break;
-				}								
+			
+			if (!(sprite instanceof CoinSprite || sprite instanceof BarrierSprite
+				|| sprite instanceof SMSRSprite || sprite instanceof ExitSprite)) {
+				
+				double x = sprite.getCenterX() - this.getCenterX();
+				double y = sprite.getCenterY() - this.getCenterY();
+				double proximityToSprite = Math.sqrt(x*x + y*y);
+				
+				if (proximityToSprite <= 100) {
+					isCloseToSprite = true;
+				}
+				else {
+					isCloseToSprite = false;
+				}
 			}
 		}
+		return isCloseToSprite;
+	}
+	
+	
+	public String getProximityMessage() {
+		
+		if (isCloseToSprite == true) {
+			return  "close";
+		}
+		else {
+			return "not close";
+		}	
 	}
 
 	public void stop() {
@@ -277,17 +300,7 @@ public class SMSRSprite implements DisplayableSprite, MovableSprite, CollidingSp
 	}
 
 
-	public String getProximityMessage() {
-		String proximityMessage = "";
-		
-		if (isCloseToSprite <= 100) {
-				proximityMessage = "Watch out!";
-			}
-		System.out.println (proximityMessage);
-
-		return proximityMessage;
-		
-	}
+	
 
 }
 
