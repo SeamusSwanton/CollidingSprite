@@ -198,6 +198,8 @@ public class SMSRSprite implements DisplayableSprite, MovableSprite, CollidingSp
 			this.centerY += deltaY;
 
 		}
+		
+		checkProximityMessage(universe);
 	}
 
 	private boolean checkCollisionWithBarrier(Universe sprites, double deltaX, double deltaY) {
