@@ -26,6 +26,7 @@ public class SMSRSprite implements DisplayableSprite, MovableSprite, CollidingSp
 	private boolean isAtExit = false;
 	
 	public int score = 0;
+	double isCloseToSprite = 0;
 	
 	private Direction direction = Direction.NEUTRAL;
 	
@@ -256,13 +257,11 @@ public class SMSRSprite implements DisplayableSprite, MovableSprite, CollidingSp
 
 		
 		for (DisplayableSprite sprite : sprites.getSprites()) {
-			if ((sprite instanceof CoinSprite && sprite instanceof BarrierSprite && sprite instanceof SMSRSprite && sprite instanceof ExitSprite) == false) {
-				double isCloseToSprite = Math.pow((this.getCenterX() - sprite.getCenterX()), 2) + Math.pow((this.getCenterX() - sprite.getCenterX()), 2);
-				if (isCloseToSprite >= 100){
-					System.out.print("msg");
-				}
-				
-				
+			if (sprite instanceof CoinSprite == false && sprite instanceof BarrierSprite == false && sprite instanceof SMSRSprite == false && sprite instanceof ExitSprite == false) {
+				isCloseToSprite = Math.sqrt(Math.pow((this.getCenterX() - sprite.getCenterX()), 2) + Math.pow(this.getCenterX() - sprite.getCenterX(), 2));
+				if (isCloseToSprite <= 100){
+					break;
+				}								
 			}
 		}
 	}
@@ -277,13 +276,22 @@ public class SMSRSprite implements DisplayableSprite, MovableSprite, CollidingSp
 		return isAtExit;
 	}
 
-	@Override
+
 	public String getProximityMessage() {
-		// TODO Auto-generated method stub
-		return null;
+		String proximityMessage = "";
+		
+		if (isCloseToSprite <= 100) {
+				proximityMessage = "Watch out!";
+			}
+		System.out.println (proximityMessage);
+
+		return proximityMessage;
+		
 	}
 
-
-
 }
+
+
+
+
 
