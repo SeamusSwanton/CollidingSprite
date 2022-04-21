@@ -28,6 +28,7 @@ public class SMSRSprite implements DisplayableSprite, MovableSprite, CollidingSp
 	
 	public int score = 0;
 	boolean isCloseToSprite = false;
+	boolean closeToFriendSpirte = false;
 	private String proximityMessage = "not close";
 	
 	private Direction direction = Direction.NEUTRAL;
@@ -49,8 +50,13 @@ public class SMSRSprite implements DisplayableSprite, MovableSprite, CollidingSp
 			try {
 				images = new Image[5];
 				for (int i = 0; i < 5; i++) {
-					String path = String.format("res/SMSR/SMSRsprite-%d.png", i);
-					images[i] = ImageIO.read(new File(path));
+					if(closeToFriendSpirte == true) {
+						String path = ("res/SMSR/SMSRsprite-5.png");
+					}
+					else{
+						String path = String.format("res/SMSR/SMSRsprite-%d.png", i);
+						images[i] = ImageIO.read(new File(path));
+					}					
 				}
 			}
 			catch (IOException e) {
@@ -269,6 +275,10 @@ public class SMSRSprite implements DisplayableSprite, MovableSprite, CollidingSp
 				double x = sprite.getCenterX() - this.getCenterX();
 				double y = sprite.getCenterY() - this.getCenterY();
 				double proximityToSprite = Math.sqrt(x*x + y*y);
+				
+				if (sprite.getClass().getName().equals("CMMSprite") || sprite.getClass().getName().equals("DWESprite")) {
+					closeToFriendSpirte = true; 
+				}
 				
 				if (proximityToSprite <= 100) {
 					isCloseToSprite = true;
