@@ -295,7 +295,7 @@ public class SMSRSprite implements DisplayableSprite, MovableSprite, CollidingSp
 	public String getProximityMessage() {
 		
 		if (isCloseToSprite == true) {
-			return  "close";
+			return  "Begone foul beast, you are not welcome in my presence, fiend.";
 		}
 		else {
 			return "not close";
